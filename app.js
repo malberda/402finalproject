@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, TextInput, useState, Image, L
 import Constants from 'expo-constants';
 import {SelectDropdown, DropdownData} from "expo-select-dropdown";
 import { SelectList } from 'react-native-dropdown-select-list'
+const styles = require('./style.css');
 
 // You can import from local files
 import AssetExample from './components/AssetExample';
