@@ -35,6 +35,141 @@ export default function App() {
   const [selected2, setSelected2] = React.useState('');
   const [selected3, setSelected3] = React.useState('');
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'top',
+      paddingTop: Constants.statusBarHeight,
+      backgroundColor: '#ecf0f1',
+      padding: 8,
+      margin: 15,
+    },
+    logo: {
+      width: 200,
+      height: 100
+    },
+    paragraph: {
+      margin: 24,
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#F5FCFF'
+    },
+    text: {
+      fontSize: '20px',
+      marginBottom: '10px'
+    },
+    logo: {
+      width: '200px',
+      height: '150px',
+      marginBottom: '20px'
+    },
+    button: {
+      backgroundColor: '#4CAF50',
+      border: 'none',
+      color: 'white',
+      padding: '10px 20px',
+      textAlign: 'center',
+      textDecoration: 'none',
+      display: 'inline-block',
+      fontSize: '16px',
+      marginTop: '20px',
+      borderRadius: '5px'
+    },
+    input: {
+      height: '40px',
+      width: '100%',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+      padding: '10px',
+      marginBottom: '10px'
+    },
+    dropdown: {
+      width: '100%',
+      height: '40px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+      padding: '10px',
+      marginBottom: '10px'
+    },
+    dropdown_item: {
+      padding: '10px'
+    },
+    dropdown_item_text: {
+      fontSize: '16px'
+    },
+    dropdown_item_selected: {
+      backgroundColor: '#4CAF50',
+      color: 'white'
+    },
+    select_dropdown: {
+      marginBottom: '10px'
+    },
+    list_item: {
+      padding: '10px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+      marginBottom: '10px'
+    },
+    list_item_image: {
+      width: '100%',
+      height: '200px',
+      objectFit: 'cover',
+      borderRadius: '5px'
+    },
+    list_item_title: {
+      fontSize: '18px',
+      fontWeight: 'bold',
+      marginBottom: '5px'
+    },
+    list_item_price: {
+      fontSize: '16px',
+      marginBottom: '5px'
+    },
+    list_item_button: {
+      backgroundColor: '#4CAF50',
+      border: 'none',
+      color: 'white',
+      padding: '10px 20px',
+      textAlign: 'center',
+      textDecoration: 'none',
+      display: 'inline-block',
+      fontSize: '16px',
+      marginTop: '10px',
+      borderRadius: '5px'
+    },
+    list_item_button_hover: {
+      backgroundColor: '#3e8e41'
+    },
+    search_section: {
+      width: '100%',
+      padding: '10px',
+      marginBottom: '10px'
+    },
+    filter_section: {
+      width: '100%',
+      padding: '10px',
+      marginBottom: '10px',
+      display: 'flex',
+      justifyContent: 'space-between'
+    },
+    filter_dropdown: {
+      width: '48%'
+    },
+    sort_dropdown: {
+      width: '48%'
+    },
+    results_section: {
+      width: '100%',
+      padding: '10px'
+    }
+  });
+
 const buttonPressed = () => {
   console.log(selected1);
   console.log(selected2);
@@ -146,138 +281,3 @@ function filterSort () {
   );
 
 }// end app()
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'top',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-    margin: 15,
-  },
-  logo: {
-    width: 200,
-    height: 100
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  text: {
-    fontSize: '20px',
-    marginBottom: '10px'
-  },
-  logo: {
-    width: '200px',
-    height: '150px',
-    marginBottom: '20px'
-  },
-  button: {
-    backgroundColor: '#4CAF50',
-    border: 'none',
-    color: 'white',
-    padding: '10px 20px',
-    textAlign: 'center',
-    textDecoration: 'none',
-    display: 'inline-block',
-    fontSize: '16px',
-    marginTop: '20px',
-    borderRadius: '5px'
-  },
-  input: {
-    height: '40px',
-    width: '100%',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    padding: '10px',
-    marginBottom: '10px'
-  },
-  dropdown: {
-    width: '100%',
-    height: '40px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    padding: '10px',
-    marginBottom: '10px'
-  },
-  dropdown_item: {
-    padding: '10px'
-  },
-  dropdown_item_text: {
-    fontSize: '16px'
-  },
-  dropdown_item_selected: {
-    backgroundColor: '#4CAF50',
-    color: 'white'
-  },
-  select_dropdown: {
-    marginBottom: '10px'
-  },
-  list_item: {
-    padding: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    marginBottom: '10px'
-  },
-  list_item_image: {
-    width: '100%',
-    height: '200px',
-    objectFit: 'cover',
-    borderRadius: '5px'
-  },
-  list_item_title: {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    marginBottom: '5px'
-  },
-  list_item_price: {
-    fontSize: '16px',
-    marginBottom: '5px'
-  },
-  list_item_button: {
-    backgroundColor: '#4CAF50',
-    border: 'none',
-    color: 'white',
-    padding: '10px 20px',
-    textAlign: 'center',
-    textDecoration: 'none',
-    display: 'inline-block',
-    fontSize: '16px',
-    marginTop: '10px',
-    borderRadius: '5px'
-  },
-  list_item_button_hover: {
-    backgroundColor: '#3e8e41'
-  },
-  search_section: {
-    width: '100%',
-    padding: '10px',
-    marginBottom: '10px'
-  },
-  filter_section: {
-    width: '100%',
-    padding: '10px',
-    marginBottom: '10px',
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  filter_dropdown: {
-    width: '48%'
-  },
-  sort_dropdown: {
-    width: '48%'
-  },
-  results_section: {
-    width: '100%',
-    padding: '10px'
-  }
-});
