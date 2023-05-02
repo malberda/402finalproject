@@ -1,16 +1,8 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, useState, Image, Linking, ScrollView, Button, Select} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image, Linking, ScrollView, Dimensions, Math} from 'react-native';
 import Constants from 'expo-constants';
-import {SelectDropdown, DropdownData} from "expo-select-dropdown";
 import {Picker} from '@react-native-community/picker';
-import { SelectList } from 'react-native-dropdown-select-list';
-//style based off of https://ceblog.s3.amazonaws.com/wp-content/uploads/2012/02/mcdonalds.png
-
-// You can import from local files
-import AssetExample from './components/AssetExample';
-
-// or any pure javascript modules available in npm
-import { Card } from 'react-native-paper';
+const dimensions = Dimensions.get('window');
 var stores = [
   {value: 0, label: 'None Selected'},
   {value: 1, label: 'rei.com'},
@@ -20,18 +12,26 @@ var hobbyGeneral = [
   {value: 0, label: 'None Selected'},
   {value: 1, label: 'Snow'},
   {value: 2, label: 'Rock Climbing'},
+  {value: 3, label: 'Running'},
 ]
 var hobbySpecific = [
   {value: 0, label: 'None Selected'},
   {value: 1, label: 'Snowboarding'},
   {value: 2, label: 'Skiing'},
-  {value: 3, label: 'Rock Climbing'},
+  {value: 3, label: 'Rock Climbing Shoes'},
+  {value: 4, label: 'Rock Climbing Harness'},
+  {value: 5, label: 'Running Shoes'},
 ]
 var defaultValues = [
-          {value: '1', store: 2, hobbyGeneral: 1, hobbySpecific: 1, link: 'https://www.rei.com/product/193947/arbor-ethos-snowboard-womens-20222023', img: "https://www.rei.com/media/bae1912b-315a-466e-8fff-abcb985a2492.jpg?size=784x588", name:'Arbor Snowboard', price: '239.83'},
-          {value: '2', store: 2, hobbyGeneral: 1, hobbySpecific: 2, link: 'https://www.rei.com/product/199291/rossignol-experience-80-carbon-w-skis-with-bindings-womens-20212022', img:"https://www.rei.com/media/68f7dd36-2e11-49a7-b746-318242191a99.jpg?size=784x588", name:'Rossignol Skis', price: '559.83'},
+          {value: '1', store: 1, hobbyGeneral: 1, hobbySpecific: 1, link: 'https://www.rei.com/product/193947/arbor-ethos-snowboard-womens-20222023', img: "https://www.rei.com/media/bae1912b-315a-466e-8fff-abcb985a2492.jpg?size=784x588", name:'Arbor Snowboard', price: '239.83'},
+          {value: '2', store: 1, hobbyGeneral: 1, hobbySpecific: 2, link: 'https://www.rei.com/product/199291/rossignol-experience-80-carbon-w-skis-with-bindings-womens-20212022', img:"https://www.rei.com/media/68f7dd36-2e11-49a7-b746-318242191a99.jpg?size=784x588", name:'Rossignol Skis', price: '559.83'},
           {value: '3', store: 1, hobbyGeneral: 2, hobbySpecific: 3, link: 'https://www.rei.com/product/203930/la-sportiva-tarantulace-climbing-shoes-mens', img:"https://www.rei.com/media/0108620f-59fd-4905-babc-38f98930e187.jpg?size=784x588", name:'Tarantulace Climbing Shoes', price: '89.00'},
-          {value: '4', store: 1, hobbyGeneral: 2, hobbySpecific: 3, link: 'https://www.rei.com/product/169549/camp-energy-cr3-harness-mens', img:"https://www.rei.com/media/109e9e43-259c-4b0e-aafa-51691e4775ba.jpg?size=784x588", name:'C.A.M.P. Energy CR3 Harness', price: '49.95'},
+          {value: '4', store: 1, hobbyGeneral: 2, hobbySpecific: 4, link: 'https://www.rei.com/product/169549/camp-energy-cr3-harness-mens', img:"https://www.rei.com/media/109e9e43-259c-4b0e-aafa-51691e4775ba.jpg?size=784x588", name:'C.A.M.P. Energy CR3 Harness', price: '49.95'},
+          {value: '5', store: 1, hobbyGeneral: 2, hobbySpecific: 3, link: 'https://www.rei.com/product/203927/la-sportiva-finale-climbing-shoes-mens', img:"https://www.rei.com/media/3992906e-aa1d-405a-b0e2-0a5dd13c9b33.jpg?size=784x588", name:'La Sportiva Finale Climbing Shoes', price: '129.00'},
+          {value: '6', store: 2, hobbyGeneral: 1, hobbySpecific: 1, link: 'https://www.walmart.com/ip/ESP-107-cm-Sno-Spyder-Snowboard-Foot-Pads-with-Molded-Safety-Handle/49767345?from=searchResults', img:"https://i5.walmartimages.com/asr/08c99be1-4712-4a19-ba7e-7a367a39cace_1.c1f5a2e13fb99015f65c65dc6ebc0c55.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF", name:'ESP 107 cm Sno Spyder Snowboard - Foot Pads with Molded Safety Handle', price: '27.99'},
+          {value: '7', store: 1, hobbyGeneral: 3, hobbySpecific: 3, link: 'https://www.rei.com/product/163753/evolv-kronos-climbing-shoes-mens', img:"https://www.rei.com/media/40872f17-f345-41cd-a8b8-24d897a652f9.jpg?size=784x588", name:'evolv Kronos Climbing Shoes - Men\'s', price: '139.00'},
+          {value: '8', store: 1, hobbyGeneral: 3, hobbySpecific: 3, link: 'https://www.rei.com/product/849257/scarpa-instinct-vs-climbing-shoes-mens', img:"https://www.rei.com/media/99049658-d779-431e-8353-fda5751f9e3f.jpg?size=784x588", name:'Scarpa Instinct VS Climbing Shoes - Men\'s', price: '209.00'},
+          {value: '9', store: 1, hobbyGeneral: 3, hobbySpecific: 3, link: 'https://www.rei.com/product/209527/altra-torin-6-road-running-shoes-mens', img:"https://www.rei.com/media/e0a0bfa5-273f-4e85-bb6b-52eb9e960bd9.jpg?size=784x588", name:'Altra Torin 6 Road-Running Shoes - Men\'s', price: '104.93'},
         ]
 
         
@@ -236,11 +236,6 @@ function filterSort () {
 }// end app()
 
 const styles = StyleSheet.create({
-  dialogContentView: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
   dropDownInput: {
     backgroundColor: '#000cb6',
     color: '#00ecdc',
@@ -257,138 +252,25 @@ const styles = StyleSheet.create({
     color: '#00f2de',
   },
   shopObjectText: {
-    color: '#283a00'
+    color: '#ffce00'
   },
   option: {
     color: '#ffce00',
-    backgroundColor: '#ffce00',
+    backgroundColor: '#ff0000',
   },  
   container: {
     flex: 1,
     justifyContent: 'top',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ff0000',
+    backgroundColor: '#ffce00',
     padding: 8,
     margin: 10,
     alignItems: 'center',
   },
   logo: {
-    width: 200,
-    height: 150,
+    aspectRatio: 2/2,
+    width: (dimensions.width * 6.9/10),
+    height: undefined,
     marginBottom: 20,
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: '#4CAF50',
-    borderWidth: 0,
-    color: 'white',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    textAlign: 'center',
-    textDecorationLine: 'none',
-    display: 'flex',
-    fontSize: 16,
-    marginTop: 20,
-    borderRadius: 5,
-    },
-  text: {
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  input: {
-    height: 40,
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-  },
-  dropdown: {
-    width: '100%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-  },
-  dropdown_item: {
-    padding: 10,
-  },
-  dropdown_item_text: {
-    fontSize: 16,
-  },
-  dropdown_item_selected: {
-    backgroundColor: '#4CAF50',
-    color: 'white',
-  },
-  select_dropdown: {
-    marginBottom: 10,
-  },
-  list_item: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    marginBottom: 10,
-  },
-  list_item_image: {
-    width: '100%',
-    height: 200,
-    borderRadius: 5,
-  },
-  list_item_title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  list_item_price: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  list_item_button: {
-    backgroundColor: '#4CAF50',
-    borderWidth: 0,
-    color: 'white',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    textAlign: 'center',
-    textDecorationLine: 'none',
-    display: 'flex',
-    fontSize: 16,
-    marginTop: 10,
-    borderRadius: 5,
-  },
-  list_item_button_hover: {
-    backgroundColor: '#3e8e41',
-  },
-  search_section: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-  },
-  filter_section: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  filter_dropdown: {
-    width: '48%',
-  },
-  sort_dropdown: {
-    width: '48%',
-  },
-  results_section: {
-    width: '100%',
-    padding: 10,
   },
 });
