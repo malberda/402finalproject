@@ -1,0 +1,14 @@
+# Hobby Shop App
+
+This is a Hobby merchandise searching app, which allows users to search for gear for their hobbies, and navigate to store that sells that merchandise.
+
+# Using the App
+To start, users are provided a default list of hobby items displayed in a scrollable list. Users also have the option to search/filter the results of the list to match what they want to see.
+They can do this by using the standard "search" box at the top of the screen, which will match items in the result list to what the user searches for in the text box.
+
+Additionally, there are 4 filters that users can apply to the result list. These are the General Hobbies filter, the Specific Hobby filter, the Store filter, and the Price filter.
+
+The general hobbies filter is a broad filter that allows the user to filter which hobbies are displayed in a broad spectrum, such as the weather conditions for the sport, like "Snow".
+The specific hobbies filter can be used to isolate the list to display items for an individual, specific hobby, like mountain biking.
+The Store filter allows the user to decide wich stores products they want to see, so that they can pick stores close to them or brand loyalty.
+The Price filer lets the user sort items displayed by their price either lowest to highest, or highest to lowest.
